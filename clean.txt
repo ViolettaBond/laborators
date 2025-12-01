@@ -1,0 +1,3 @@
+ivan:123:ivan@mail.com
+anna:qwerty:anna@mail.com
+nastya:111:nastya@mail.com

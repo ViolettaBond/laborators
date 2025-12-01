@@ -40,15 +40,14 @@
 
 <div class="container">
     <h3>Выберите лабораторную работу</h3>
-
-    <a href="first.php">Лабораторная работа №1</a>
-    <a href="second.php">Лабораторная работа №2</a>
-    <a href="third.php">Лабораторная работа №3</a>
     <a href="fourth.php">Лабораторная работа №4</a>
+    <a href="fourthone.php">Лабораторная работа №4.1</a>
+    <a href="fourthtwo.php">Лабораторная работа №4.2</a>
     <a href="fifth.php">Лабораторная работа №5</a>
+    <a href="fifthone.php">Лабораторная работа №5.1</a>
+    <a href="fifthtwo.php">Лабораторная работа №5.2</a>
     <a href="sixth.php">Лабораторная работа №6</a>
-    <a href="sixthone.php">Лабораторная работа №6.1</a>
-    <a href="sixthtwo.php">Лабораторная работа №6.2</a>
+
 </div>
 
 

@@ -1,46 +1,28 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Матрица 5x5</title>
-</head>
-<body>
-
-<h2>Матрица 5×5</h2>
+<?php
+require_once 'TimeData.php';
+?>
 
 <form method="post">
-    <table border="1">
-        <?php
-        for ($i = 0; $i < 5; $i++) {
-            echo "<tr>";
-            for ($j = 0; $j < 5; $j++) {
-                echo "<td><input type='text' name='b[$i][$j]' style='width:50px'></td>";
-            }
-            echo "</tr>";
-        }
-        ?>
-    </table>
-    <br>
-    <button type="submit">Готово</button>
+    <label>Количество часов:</label>
+    <input type="number" name="hours" required>
+
+    <label>Количество минут:</label>
+    <input type="number" name="minutes" required>
+
+    <button type="submit">Рассчитать</button>
 </form>
 
 <?php
-if (!empty($_POST['b'])) {
-    $b = $_POST['b'];
-    $prod = 1;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $hours = $_POST['hours'];
+    $minutes = $_POST['minutes'];
 
-    for ($i = 0; $i < 5; $i++) {
-        for ($j = 0; $j < 5; $j++) {
-            $val = intval($b[$i][$j]);
-            if ($i + $j > 4) {
-                $prod *= $val;
-            }
-        }
-    }
+    $obj = new TimeData($hours, $minutes);
 
-    echo "<p>Произведение элементов ниже левой диагонали: $prod</p>";
+    echo "<h3>Информация:</h3>";
+    echo $obj->getInfo();
+
+    echo "<h3>Общее количество минут:</h3>";
+    echo $obj->getTotalMinutes();
 }
 ?>
-
-</body>
-</html>

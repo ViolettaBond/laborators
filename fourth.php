@@ -1,59 +1,47 @@
 <!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Обработка массива</title>
-</head>
+<html>
 <body>
 
-<h2>Обработка массива</h2>
-
 <form method="post">
-    <table border="1">
-        <tr>
-            <td colspan="11">Введите 11 элементов</td>
-        </tr>
-        <tr>
-            <?php
-            for ($i = 0; $i < 11; $i++) {
-                echo "<td><input type='text' name='arr[]' style='width:50px'></td>";
-            }
-            ?>
-        </tr>
-    </table>
-    <br>
-    <button type="submit">Готово</button>
+    <p>Первый текст:</p>
+    <textarea name="t1" rows="5" cols="50"></textarea>
+
+    <p>Второй текст:</p>
+    <textarea name="t2" rows="5" cols="50"></textarea>
+
+    <br><br>
+    <button type="submit">Сравнить</button>
 </form>
 
 <?php
-if (!empty($_POST['arr'])) {
+if (!empty($_POST["t1"]) && !empty($_POST["t2"])) {
 
-    $arr = $_POST['arr'];
-    $sum = 0;
-    foreach ($arr as $x) {
-        $x = intval($x);
-        if ($x < 0 && $x % 2 != 0) {
-            $sum += $x;
+    $t1 = strtolower(preg_replace("/[^a-zа-яё0-9 ]/iu", " ", $_POST["t1"]));
+    $t2 = strtolower(preg_replace("/[^a-zа-яё0-9 ]/iu", " ", $_POST["t2"]));
+
+    $a1 = array_filter(explode(" ", $t1));
+    $a2 = array_filter(explode(" ", $t2));
+
+    $same = 0;
+
+    foreach ($a1 as $word) {
+        if (in_array($word, $a2)) {
+            $same++;
         }
     }
-    for ($i = 0; $i < count($arr); $i++) {
-        $val = intval($arr[$i]);
-        if ($val % 3 == 0) {
-            $arr[$i] = $sum;
-        }
-    }
 
-    echo "<br>";
-    echo "<table border='1'><tr>";
+    $total = max(count($a1), count($a2));
+    $percent = $same / $total;
 
-    foreach ($arr as $x) {
-        echo "<td>$x</td>";
-    }
+    if ($percent >= 0.8) $grade = 5;
+    elseif ($percent >= 0.6) $grade = 4;
+    elseif ($percent >= 0.4) $grade = 3;
+    elseif ($percent >= 0.2) $grade = 2;
+    else $grade = 1;
 
-    echo "</tr></table>";
+    echo "<p>Совпадение: $grade из 5</p>";
 }
 ?>
 
 </body>
 </html>
-
